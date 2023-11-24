@@ -1,6 +1,8 @@
+import HomePage from "@/components/template/HomePage";
 import { getSession } from "next-auth/react";
+
 const index = () => {
-  return <div>Home page</div>;
+  return <HomePage />;
 };
 
 export default index;
