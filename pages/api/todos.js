@@ -62,8 +62,6 @@ async function handler(req, res) {
       { $set: { "todos.$.status": status } }
     );
 
-    console.log(result);
-
     res.status(200).json({ status: "success" });
   }
 }

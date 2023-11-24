@@ -34,7 +34,6 @@ async function handler(req, res) {
   const hashedPassword = await hashPassword(password);
 
   const newUser = await User.create({ email: email, password: hashedPassword });
-  console.log(newUser);
 
   res.status(201).json({ status: "success", message: "Created user!" });
 }
