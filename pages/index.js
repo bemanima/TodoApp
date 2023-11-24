@@ -1,5 +1,4 @@
 import { getSession } from "next-auth/react";
-import styles from "./index.module.css";
 const index = () => {
   return <div>Home page</div>;
 };

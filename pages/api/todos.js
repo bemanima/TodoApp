@@ -1,6 +1,8 @@
 import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
+import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
+import { authOptions } from "./auth/[...nextauth]";
 
 async function handler(req, res) {
   try {
@@ -12,7 +14,7 @@ async function handler(req, res) {
       .json({ status: "failed", message: "Error in connecting to DB" });
   }
 
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
     return res
@@ -20,7 +22,7 @@ async function handler(req, res) {
       .json({ status: "failed", message: "You are not logged in!" });
   }
 
-  const user = User.findOne({ email: session.user.email });
+  const user = await User.findOne({ email: session.user.email });
 
   if (!user) {
     return res
