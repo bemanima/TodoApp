@@ -1,11 +1,11 @@
-import HomePage from "@/components/template/HomePage";
+import AddTodoPage from "@/components/template/AddTodoPage";
 import { getSession } from "next-auth/react";
 
-const index = () => {
-  return <HomePage />;
+const AddTodo = () => {
+  return <AddTodoPage />;
 };
 
-export default index;
+export default AddTodo;
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
