@@ -22,8 +22,9 @@ const SignInPage = () => {
   };
 
   useEffect(() => {
+    console.log(status);
     if (status === "authenticated") router.replace("/");
-  }, [status, router]);
+  }, [status]);
 
   return (
     <div className="signin-form">
