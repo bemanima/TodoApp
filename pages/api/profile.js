@@ -1,7 +1,7 @@
 import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "@/utils/authOption";
 import { verifyPassword } from "@/utils/auth";
 
 async function handler(req, res) {
