@@ -1,34 +1,9 @@
 import User from "@/models/User";
-import connectDB from "@/utils/connectDB";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/authOption";
 import { sortTodos } from "@/utils/sortTodos";
+import middleware from "../../middleware/_middleware";
 
 async function handler(req, res) {
-  try {
-    await connectDB();
-  } catch (err) {
-    console.log(err);
-    return res
-      .status(500)
-      .json({ status: "failed", message: "Error in connecting to DB" });
-  }
-
-  const session = await getServerSession(req, res, authOptions);
-
-  if (!session) {
-    return res
-      .status(401)
-      .json({ status: "failed", message: "You are not logged in!" });
-  }
-
-  const user = await User.findOne({ email: session.user.email });
-
-  if (!user) {
-    return res
-      .status(404)
-      .json({ status: "failed", message: "User doesn't exist!" });
-  }
+  const user = req.customData.user;
 
   if (req.method === "POST") {
     const { title, status } = req.body;
@@ -66,4 +41,4 @@ async function handler(req, res) {
   }
 }
 
-export default handler;
+export default middleware(handler);
